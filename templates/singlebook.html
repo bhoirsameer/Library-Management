@@ -1,0 +1,38 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Admin Home</title>
+    <link rel="stylesheet" href="{% static 'adminhome.css' %}">
+</head>
+<body>  
+    <h1>Rent A Book</h1>
+
+    <table border="1">
+        <tr>
+            <th>Book ID</th>
+            <th>Title</th>
+            <th>Authors</th>
+            <th>Average Rating</th>
+            <th>Langauge</th>
+            <th>Rating Count</th>
+            <th>Publicstion Date</th>
+            <th>Publisher</th>
+            <th>Issue Book</th>
+        </tr>
+        <tr>
+            <td>{{ book.bookID }}</td>
+            <td>{{ book.title }}</td>
+            <td>{{ book.authors }}</td>
+            <td>{{ book.average_rating }}</td>
+            <td>{{ book.language_code }}</td>
+            <td>{{ book.ratings_count }}</td>
+            <td>{{ book.publication_date }}</td>
+            <td>{{ book.publisher }}</td>
+            <td>
+                <a href="/issue-book">Issue Book</a>
+            </td>
+        </tr>
+    </table>
+</body>
+</html>

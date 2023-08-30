@@ -1,0 +1,40 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="{% static 'adminhome.css' %}">
+</head>
+<body>  
+
+    {% for message in messages %}
+        {{message}}
+    {% endfor %}
+
+    <h1>Books issued ( Delete user if amount is paid and book is returned)</h1>
+
+    <table border="1">
+        <tr>
+            <th>User</th>
+            <th>Book ID</th>
+            <th>Title</th>
+            <th>Authors</th>
+            <th>Publisher</th>
+            <th>Action</th>
+        </tr>
+        {% for book in books %}
+        
+        <tr>
+            <td>{{ book.user_email }}</td>
+            <td>{{ book.id }}</td>
+            <td>{{ book.title }}</td>
+            <td>{{ book.authors }}</td>
+            <td>{{ book.publisher }}</td>
+            <td>
+                <a href="/delete-issued-book/{{book.id}}">Delete</a>
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+
+</body>
+</html>

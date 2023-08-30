@@ -1,0 +1,57 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Admin Home</title>
+    <link rel="stylesheet" href="{% static 'adminhome.css' %}">
+</head>
+<body>
+    <h1>Admin Home</h1><br>
+
+    <a href="/search-book" class="in-line">Search Book</a>
+
+    <a href="/addbook" class="in-line">Add New Book</a>
+    
+    <a href="/issued-books" class="in-line">View all issued books</a>
+
+
+    <h4>{% for message in messages %}
+        {{message}}
+    {% endfor %}</h4>
+    <table border="1">
+        <tr>
+            <th>Book ID</th>
+            <th>Title</th>
+            <th>Authors</th>
+            <th>Average Rating</th>
+            <th>ISBN</th>
+            <th>ISBN13</th>
+            <th>LANGAUGE</th>
+            <th>RATING COUNT</th>
+            <th>PUBLICATION DATE</th>
+            <th>PUBLISHER</th>
+            <th>ACTION</th>
+        </tr>
+        {% for book in books %}
+        
+        <tr>
+            <td>{{ book.bookID }}</td>
+            <td>{{ book.title }}</td>
+            <td>{{ book.authors }}</td>
+            <td>{{ book.average_rating }}</td>
+            <td>{{ book.isbn }}</td>
+            <td>{{ book.isbn13 }}</td>
+            <td>{{ book.language_code }}</td>
+            <td>{{ book.ratings_count }}</td>
+            <td>{{ book.publication_date }}</td>
+            <td>{{ book.publisher }}</td>
+            <td>
+                <a href="/edit/{{book.id}}">Edit</a>   |
+                <a href="/delete/{{book.id}}">Delete</a>
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+    
+</body>
+</html>

@@ -1,0 +1,19 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'searchbook.css' %}">
+    <title>Document</title>
+</head>
+<body>
+    <form action="/search-book" method="post">
+        {% csrf_token %}
+
+        <h1>Enter Name Of Book</h1>
+        <input type="text" name="name" placeholder="Enter Name of Book or author name ">
+        <input type="submit" value="Search Book">
+    </form>
+</body>
+</html>
