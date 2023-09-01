@@ -17,4 +17,5 @@ urlpatterns = [
     path('delete-issued-book/<int:pk>',deleteissuedbook,name="delete-issued-book"),
     path('addbook',addbook,name="add_book"),
     path('payfees/<str:email>',payfees,name="payfees"),
+    path('revover-books',recoverbooks,name="recoverbooks"),
 ]
