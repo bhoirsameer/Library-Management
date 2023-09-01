@@ -167,3 +167,31 @@ def payfees(request,email):
     book.delete()
     return render(request,"userhome.html",{"books": Books.objects.all(),"email":email,
                                             "rbooks":RentedBooks.objects.filter(user_email=email)})
+
+def recoverbooks(request):
+    ids = []
+    books = Books.objects.all()
+    for i in books:
+        ids.append(i.bookID)
+    api_url = "https://frappe.io/api/method/frappe-library?page=2&title=and"
+    response = requests.get(api_url)
+    data = response.json()    
+    for book_data in data["message"]:
+        if book_data['bookID'] not in ids:
+            input_date = datetime.strptime(book_data['publication_date'], "%m/%d/%Y")
+            book = Books(
+                bookID=book_data['bookID'],
+                title=book_data['title'],
+                authors=book_data['authors'],
+                average_rating=book_data['average_rating'],
+                isbn=book_data['isbn'],
+                isbn13=book_data['isbn13'],
+                language_code=book_data['language_code'],
+                ratings_count=book_data['ratings_count'],
+                text_reviews_count=book_data['text_reviews_count'],
+                publication_date=input_date,
+                publisher=book_data['publisher']
+            )
+            book.save()
+    messages.success(request,"Books Recovered....")
+    return render(request,"adminhome.html",{"books": Books.objects.all()})
